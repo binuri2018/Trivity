@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import './Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -51,68 +52,167 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="card">
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+    <div className="register-container">
+      <div className="register-header">
+        <div className="header-left">
+          <div className="trivity-logo">
+            <div className="logo-leaves">
+              <div className="leaf yellow"></div>
+              <div className="leaf green"></div>
+              <div className="leaf green"></div>
+            </div>
+            <span className="logo-text">Trivity</span>
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+        </div>
+        <div className="header-center">
+          <h1>Join Trivity</h1>
+        </div>
+        <div className="header-right">
+          <div className="auth-links">
+            <Link to="/login" className="auth-link">Sign In</Link>
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+        </div>
+      </div>
+
+      <div className="register-content">
+        <div className="register-card">
+          <div className="card-header">
+            <h2>Create Your Account</h2>
+            <p>Start your sustainability journey with Trivity today</p>
           </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+          
+          <form onSubmit={handleSubmit} className="register-form">
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                required
+                className="form-input"
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+                className="form-input"
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Create a strong password"
+                required
+                className="form-input"
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm your password"
+                required
+                className="form-input"
+              />
+            </div>
+            
+            {error && (
+              <div className="error-message">
+                <span className="error-icon">⚠️</span>
+                {error}
+              </div>
+            )}
+            
+            {success && (
+              <div className="success-message">
+                <span className="success-icon">✅</span>
+                {success}
+              </div>
+            )}
+            
+            <button 
+              type="submit" 
+              className="register-btn"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="loading-spinner"></span>
+                  Creating Account...
+                </>
+              ) : (
+                <>
+                  <span className="btn-icon">🚀</span>
+                  Create Account
+                </>
+              )}
+            </button>
+          </form>
+          
+          <div className="card-footer">
+            <p>Already have an account? 
+              <Link to="/login" className="link-primary"> Sign in here</Link>
+            </p>
           </div>
-          {error && <div className="error">{error}</div>}
-          {success && <div className="success">{success}</div>}
-          <button 
-            type="submit" 
-            className="btn btn-primary"
-            disabled={loading}
-            style={{ width: '100%', marginTop: '20px' }}
-          >
-            {loading ? 'Creating Account...' : 'Register'}
-          </button>
-        </form>
-        <p style={{ textAlign: 'center', marginTop: '20px' }}>
-          Already have an account? <Link to="/login">Login here</Link>
-        </p>
+        </div>
+        
+        <div className="register-benefits">
+          <h3>What You'll Get</h3>
+          <div className="benefits-grid">
+            <div className="benefit-item">
+              <div className="benefit-icon">📊</div>
+              <h4>Sustainability Dashboard</h4>
+              <p>Track your environmental impact with real-time analytics and insights</p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">🎯</div>
+              <h4>SDG Recommendations</h4>
+              <p>Get personalized UN SDG goals tailored to your business needs</p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">📈</div>
+              <h4>Progress Tracking</h4>
+              <p>Monitor your sustainability journey with detailed progress reports</p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">🌍</div>
+              <h4>Carbon Footprint</h4>
+              <p>Calculate and reduce your carbon emissions with our advanced tools</p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">📋</div>
+              <h4>Compliance Reports</h4>
+              <p>Generate professional reports for stakeholders and compliance</p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">🤝</div>
+              <h4>Expert Support</h4>
+              <p>Access to sustainability experts and best practice guidance</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -45,10 +45,7 @@ function App() {
                 path="/login" 
                 element={
                   <PublicRoute>
-                    <div>
-                      <Navbar />
-                      <Login />
-                    </div>
+                    <Login />
                   </PublicRoute>
                 } 
               />
@@ -56,10 +53,7 @@ function App() {
                 path="/register" 
                 element={
                   <PublicRoute>
-                    <div>
-                      <Navbar />
-                      <Register />
-                    </div>
+                    <Register />
                   </PublicRoute>
                 } 
               />
