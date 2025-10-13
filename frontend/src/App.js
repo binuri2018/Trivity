@@ -7,6 +7,10 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import SustainabilityReadiness from './components/SustainabilityReadiness';
+import SDGsForm from './components/SDGsForm';
+import SDGsResults from './components/SDGsResults';
+import DataCenter from './components/DataCenter';
+import Scope2Form from './components/Scope2Form';
 import './App.css';
 
 function ProtectedRoute({ children }) {
@@ -71,6 +75,38 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <SustainabilityReadiness />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/sdgs-form" 
+                element={
+                  <ProtectedRoute>
+                    <SDGsForm />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/sdgs-results" 
+                element={
+                  <ProtectedRoute>
+                    <SDGsResults />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/data-center" 
+                element={
+                  <ProtectedRoute>
+                    <DataCenter />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/scope2-form" 
+                element={
+                  <ProtectedRoute>
+                    <Scope2Form />
                   </ProtectedRoute>
                 } 
               />

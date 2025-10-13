@@ -89,8 +89,8 @@ const SustainabilityReadiness = () => {
             <ul>
               <li><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
               <li><Link to="/sustainability" className="nav-link active">Sustainability Readiness Index</Link></li>
-              <li><a href="#" className="nav-link">Recommended UN SDGs</a></li>
-              <li><a href="#" className="nav-link">Data Center</a></li>
+              <li><Link to="/sdgs-form" className="nav-link">Recommended UN SDGs</Link></li>
+              <li><Link to="/data-center" className="nav-link">Data Center</Link></li>
               <li><a href="#" className="nav-link">User Profile</a></li>
             </ul>
             

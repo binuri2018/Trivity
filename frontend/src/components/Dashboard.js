@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useSustainability } from '../contexts/SustainabilityContext';
@@ -7,166 +7,197 @@ import './Dashboard.css';
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { scores, isSubmitted } = useSustainability();
+  const [sdgData, setSdgData] = useState(null);
 
-  const recentActivities = [
-    { title: "Sustainability Assessment Completed", time: "2 hours ago" },
-    { title: "ESG Report Generated", time: "1 day ago" },
-    { title: "Carbon Footprint Analysis", time: "3 days ago" },
-    { title: "Sustainability Goals Updated", time: "1 week ago" }
-  ];
+  useEffect(() => {
+    // Load SDG data from localStorage
+    const savedSdgData = localStorage.getItem('sdgFormData');
+    if (savedSdgData) {
+      setSdgData(JSON.parse(savedSdgData));
+    }
+  }, []);
+
+  const getScoreLevel = (score) => {
+    if (score >= 80) return { level: 'Excellent', color: '#28a745' };
+    if (score >= 60) return { level: 'Good', color: '#17a2b8' };
+    if (score >= 40) return { level: 'Fair', color: '#ffc107' };
+    return { level: 'Poor', color: '#dc3545' };
+  };
+
+  const getScoreMessage = (score) => {
+    if (score >= 80) return "Excellent understanding of sustainability with comprehensive processes in place";
+    if (score >= 60) return "Have a good understanding of sustainability and there are processes in place to practice the requirements of sustainability";
+    if (score >= 40) return "Basic understanding of sustainability with some processes in place";
+    return "Limited understanding of sustainability, needs improvement in processes";
+  };
+
+  const overallScore = isSubmitted ? scores.overall : 58.5;
+  const scoreInfo = getScoreLevel(overallScore);
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1>Dashboard</h1>
-        <div className="user-info">
-          <span className="user-icon">👤</span>
-          <span>{user?.name || 'Demo User'}</span>
-          <span className="premium-badge">Premium User</span>
+    <div className="summary-container">
+      <div className="summary-header">
+        <div className="header-left">
+          <div className="trivity-logo">
+            <div className="logo-leaves">
+              <div className="leaf yellow"></div>
+              <div className="leaf green"></div>
+              <div className="leaf green"></div>
+            </div>
+            <span className="logo-text">Trivity</span>
+          </div>
+        </div>
+        <div className="header-center">
+          <h1>Summary</h1>
+        </div>
+        <div className="header-right">
+          <div className="user-profile">
+            <div className="user-icon">👤</div>
+            <div className="user-info">
+              <div className="user-name">{user?.name || 'uditha'}</div>
+              <div className="user-type">Premium User</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="dashboard-layout">
+      <div className="summary-layout">
         <div className="sidebar">
-          <div className="sidebar-logo">
-            <div className="logo-squares">
-              <div className="square yellow"></div>
-              <div className="square teal"></div>
-              <div className="square green"></div>
-            </div>
-            <h2>Trivity</h2>
-          </div>
-          
           <nav className="sidebar-nav">
-            <ul>
+            <ul className="primary-nav">
               <li><Link to="/dashboard" className="nav-link active">Dashboard</Link></li>
               <li><Link to="/sustainability" className="nav-link">Sustainability Readiness Index</Link></li>
-              <li><a href="#" className="nav-link">Recommended UN SDGs</a></li>
-              <li><a href="#" className="nav-link">Data Center</a></li>
+              <li><Link to="/sdgs-form" className="nav-link">Recommended UN SDGs</Link></li>
+              <li><Link to="/data-center" className="nav-link">Data Center</Link></li>
               <li><a href="#" className="nav-link">User Profile</a></li>
             </ul>
             
-            <div className="coming-soon">COMING SOON</div>
-            <ul>
-              <li><a href="#" className="nav-link disabled">Green Financing</a></li>
-              <li><a href="#" className="nav-link disabled">Green Exchange</a></li>
-              <li><a href="#" className="nav-link disabled">Sustainability Frameworks</a></li>
-              <li><a href="#" className="nav-link disabled">Report Generation</a></li>
-              <li><a href="#" className="nav-link disabled">Water Usage</a></li>
-              <li><a href="#" className="nav-link disabled">Supply Chain Mgmt</a></li>
-              <li><a href="#" className="nav-link disabled">Biodiversity</a></li>
-            </ul>
+            <div className="nav-divider"></div>
+            
+            <div className="coming-soon">
+              <h3>Coming Soon</h3>
+              <ul>
+                <li><a href="#" className="nav-link disabled">Green Financing</a></li>
+                <li><a href="#" className="nav-link disabled">Green Exchange</a></li>
+                <li><a href="#" className="nav-link disabled">Sustainability Frameworks</a></li>
+                <li><a href="#" className="nav-link disabled">Report Generation</a></li>
+                <li><a href="#" className="nav-link disabled">Water Usage</a></li>
+                <li><a href="#" className="nav-link disabled">Supply Chain Mgmt</a></li>
+                <li><a href="#" className="nav-link disabled">Biodiversity</a></li>
+              </ul>
+            </div>
           </nav>
 
-          <div className="sidebar-signout">
+          <div className="sign-out">
             <button onClick={logout} className="sign-out-link">Sign out</button>
           </div>
         </div>
 
         <div className="main-content">
-          <div className="welcome-section">
-            <h2>Welcome back, {user?.name || 'User'}!</h2>
-            <p>Here's your sustainability overview for today.</p>
-          </div>
-
-          <div className="score-card">
-            <div>
-              <h3>Overall Sustainability Score</h3>
-              <p>Based on your latest assessment</p>
-            </div>
-            <div className="score-value">{isSubmitted ? scores.overall : 0}%</div>
-          </div>
-
-          <div className="category-cards">
-            <div className="category-card">
-              <h4>Environmental</h4>
-              <div className="category-score">{isSubmitted ? scores.environmental : 0}%</div>
-              <p>Carbon footprint & resource management</p>
-            </div>
-            <div className="category-card">
-              <h4>Social</h4>
-              <div className="category-score">{isSubmitted ? scores.social : 0}%</div>
-              <p>Employee wellbeing & diversity</p>
-            </div>
-            <div className="category-card">
-              <h4>Governance</h4>
-              <div className="category-score">{isSubmitted ? scores.governance : 0}%</div>
-              <p>Leadership & ethical practices</p>
-            </div>
-          </div>
-
-          <div className="dashboard-row">
-            <div className="sustainability-trends">
-              <h3>Sustainability Trends</h3>
-              <div className="chart-placeholder">
-                📈 Sustainability Progress Chart
-              </div>
-              <div className="trend-info">
-                <span>Last 30 days</span>
-                <span className="percentage">+12% ↗</span>
-              </div>
-            </div>
-            
-            <div className="esg-breakdown">
-              <h3>ESG Breakdown</h3>
-              <div className="chart-placeholder">
-                <div className="overall-score">{isSubmitted ? scores.overall : 0}%</div>
-                <div>Overall ESG Score</div>
-              </div>
-              <div className="legend">
-                <div className="legend-item">
-                  <div className="legend-color environmental"></div>
-                  <span>Environmental</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-color social"></div>
-                  <span>Social</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-color governance"></div>
-                  <span>Governance</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="dashboard-row">
-            <div className="recent-activity">
-              <div className="recent-activity-header">
-                <h3>Recent Activity</h3>
-                <Link to="/sustainability">View All</Link>
-              </div>
-              <ul className="recent-activity-list">
-                {recentActivities.map((activity, index) => (
-                  <li key={index} className="recent-activity-item">
-                    <div className="activity-bullet"></div>
-                    <div className="activity-details">
-                      <strong>{activity.title}</strong>
-                      <span>{activity.time}</span>
+          {/* Sustainability Readiness Index Section */}
+          <div className="summary-section">
+            <h2 className="section-title">Sustainability Readiness Index</h2>
+            <div className="sri-content">
+              <div className="total-score-section">
+                <div className="score-gauge">
+                  <div className="gauge-container">
+                    <div className="gauge" style={{ '--score': overallScore, '--color': scoreInfo.color }}>
+                      <div className="gauge-fill"></div>
+                      <div className="gauge-text">
+                        <span className="score-level">{scoreInfo.level}</span>
+                        <span className="score-percentage">{overallScore}%</span>
+                      </div>
                     </div>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                  <div className="score-explanation">
+                    <h4>What the score means</h4>
+                    <p>{getScoreMessage(overallScore)}</p>
+                  </div>
+                </div>
+                <div className="medals-section">
+                  <h4>Medals obtained</h4>
+                  <div className="medal">
+                    <div className="medal-icon">🏆</div>
+                    <div className="medal-text">2021 Champion of Sustainability</div>
+                  </div>
+                  <Link to="/sustainability" className="btn btn-primary">
+                    Proceed to SRI
+                  </Link>
+                </div>
+              </div>
+              <div className="score-breakdown">
+                <div className="breakdown-gauge">
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.general : 100, '--color': '#28a745' }}>
+                    <div className="mini-gauge-fill"></div>
+                    <span className="mini-gauge-text">General</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.general : 100}%</span>
+                  </div>
+                </div>
+                <div className="breakdown-gauge">
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.environmental : 60, '--color': '#ffc107' }}>
+                    <div className="mini-gauge-fill"></div>
+                    <span className="mini-gauge-text">Environment</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.environmental : 60}%</span>
+                  </div>
+                </div>
+                <div className="breakdown-gauge">
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.social : 60, '--color': '#ffc107' }}>
+                    <div className="mini-gauge-fill"></div>
+                    <span className="mini-gauge-text">Social</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.social : 60}%</span>
+                  </div>
+                </div>
+                <div className="breakdown-gauge">
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.governance : 75, '--color': '#17a2b8' }}>
+                    <div className="mini-gauge-fill"></div>
+                    <span className="mini-gauge-text">Governance</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.governance : 75}%</span>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div className="quick-actions">
-              <h3>Quick Actions</h3>
-              <Link to="/sustainability" className="btn btn-primary">
-                <span className="btn-icon">📊</span>
-                Take Assessment
+          {/* Recommended UN SDG Goals Section */}
+          <div className="summary-section">
+            <h2 className="section-title">Recommended 17 UN SDG Goals</h2>
+            <p className="section-description">Based on your company's profile here are your top 2 UN SDG Goals</p>
+            <div className="sdg-recommendations">
+              <div className="sdg-recommendation primary">
+                <div className="sdg-icon primary">
+                  <span className="sdg-number">7</span>
+                  <div className="sdg-symbol">☀️</div>
+                </div>
+                <div className="sdg-info">
+                  <h4>SDG 7: AFFORDABLE AND CLEAN ENERGY</h4>
+                  <span className="sdg-label">Primary</span>
+                  <p>Goals that are relevant with immediate opportunities</p>
+                  <button className="btn btn-learn-more">Learn More</button>
+                </div>
+              </div>
+              <div className="sdg-recommendation secondary">
+                <div className="sdg-icon secondary">
+                  <span className="sdg-number">13</span>
+                  <div className="sdg-symbol">🌍</div>
+                </div>
+                <div className="sdg-info">
+                  <h4>SDG 13: CLIMATE ACTION</h4>
+                  <span className="sdg-label">Secondary</span>
+                  <p>Goals that are relevant with long term opportunities</p>
+                  <button className="btn btn-learn-more">Learn More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Data Center Section */}
+          <div className="summary-section">
+            <h2 className="section-title">Data Center</h2>
+            <div className="data-center-content">
+              <p>Sorry, there is no information available to show. Please click the button below to fill in the required information.</p>
+              <Link to="/data-center" className="btn btn-primary">
+                Proceed to Carbon Emissions Calculator
               </Link>
-              <button className="btn btn-secondary">
-                <span className="btn-icon">📋</span>
-                Generate Report
-              </button>
-              <button className="btn btn-secondary">
-                <span className="btn-icon">🎯</span>
-                Set Goals
-              </button>
-              <button className="btn btn-secondary">
-                <span className="btn-icon">📈</span>
-                View Analytics
-              </button>
             </div>
           </div>
         </div>
