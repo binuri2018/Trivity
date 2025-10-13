@@ -46,8 +46,9 @@ const DataCenter = () => {
         <div className="header-left">
           <div className="trivity-logo">
             <div className="logo-leaves">
-              <div className="leaf green"></div>
               <div className="leaf yellow"></div>
+              <div className="leaf green"></div>
+              <div className="leaf green"></div>
             </div>
             <span className="logo-text">Trivity</span>
           </div>
@@ -74,7 +75,7 @@ const DataCenter = () => {
               <li><Link to="/sustainability" className="nav-link">Sustainability Readiness Index</Link></li>
               <li><Link to="/sdgs-form" className="nav-link">Recommended UN SDGS</Link></li>
               <li><Link to="/data-center" className="nav-link active">Data Center</Link></li>
-              <li><a href="#" className="nav-link">User Profile</a></li>
+              <li><Link to="/profile" className="nav-link">User Profile</Link></li>
             </ul>
             
             <div className="nav-divider"></div>
@@ -94,7 +95,10 @@ const DataCenter = () => {
           </nav>
 
           <div className="sign-out">
-            <button onClick={logout} className="sign-out-link">Sign out</button>
+            <button onClick={logout} className="sign-out-link">
+              <span className="sign-out-icon">🚪</span>
+              Sign out
+            </button>
           </div>
         </div>
 

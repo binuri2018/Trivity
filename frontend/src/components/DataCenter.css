@@ -4,7 +4,7 @@
 }
 
 .data-center-header {
-  background: #007bff;
+  background: #17a2b8;
   color: white;
   padding: 1rem 2rem;
   display: flex;
@@ -179,8 +179,42 @@
 
 .sign-out {
   margin-top: auto;
-  padding-top: 1.5rem;
+  padding: 1.5rem;
   border-top: 1px solid #e9ecef;
+}
+
+.sign-out-link {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.sign-out-link:hover {
+  background: linear-gradient(135deg, #c82333, #bd2130);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.sign-out-link:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.sign-out-icon {
+  font-size: 1rem;
 }
 
 .sign-out-link {

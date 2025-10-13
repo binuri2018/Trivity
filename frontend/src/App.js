@@ -11,6 +11,7 @@ import SDGsForm from './components/SDGsForm';
 import SDGsResults from './components/SDGsResults';
 import DataCenter from './components/DataCenter';
 import Scope2Form from './components/Scope2Form';
+import UserProfile from './components/UserProfile';
 import './App.css';
 
 function ProtectedRoute({ children }) {
@@ -107,6 +108,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Scope2Form />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/profile" 
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
                   </ProtectedRoute>
                 } 
               />

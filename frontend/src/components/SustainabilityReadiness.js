@@ -66,11 +66,27 @@ const SustainabilityReadiness = () => {
   return (
     <div className="sustainability-container">
       <div className="sustainability-header">
-        <h1>New Carbon Emission Data</h1>
-        <div className="user-info">
-          <span className="user-icon">👤</span>
-          <span>{user?.name || 'Demo User'}</span>
-          <span className="premium-badge">Premium User</span>
+        <div className="header-left">
+          <div className="trivity-logo">
+            <div className="logo-leaves">
+              <div className="leaf yellow"></div>
+              <div className="leaf green"></div>
+              <div className="leaf green"></div>
+            </div>
+            <span className="logo-text">Trivity</span>
+          </div>
+        </div>
+        <div className="header-center">
+          <h1>Sustainability Readiness Index</h1>
+        </div>
+        <div className="header-right">
+          <div className="user-profile">
+            <div className="user-icon">👤</div>
+            <div className="user-info">
+              <div className="user-name">{user?.name || 'Demo User'}</div>
+              <div className="user-type">Premium User</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -91,7 +107,7 @@ const SustainabilityReadiness = () => {
               <li><Link to="/sustainability" className="nav-link active">Sustainability Readiness Index</Link></li>
               <li><Link to="/sdgs-form" className="nav-link">Recommended UN SDGs</Link></li>
               <li><Link to="/data-center" className="nav-link">Data Center</Link></li>
-              <li><a href="#" className="nav-link">User Profile</a></li>
+              <li><Link to="/profile" className="nav-link">User Profile</Link></li>
             </ul>
             
             <div className="coming-soon">COMING SOON</div>
@@ -107,7 +123,10 @@ const SustainabilityReadiness = () => {
           </nav>
 
           <div className="sidebar-signout">
-            <button onClick={logout} className="sign-out-link">Sign out</button>
+            <button onClick={logout} className="sign-out-link">
+              <span className="sign-out-icon">🚪</span>
+              Sign out
+            </button>
           </div>
         </div>
 

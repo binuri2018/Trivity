@@ -179,26 +179,42 @@
 
 .sign-out {
   margin-top: auto;
-  padding-top: 1.5rem;
+  padding: 1.5rem;
   border-top: 1px solid #e9ecef;
 }
 
 .sign-out-link {
-  background: none;
+  background: linear-gradient(135deg, #dc3545, #c82333);
   border: none;
-  color: #dc3545;
+  color: white;
   text-decoration: none;
-  font-weight: 500;
-  display: block;
-  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
 }
 
 .sign-out-link:hover {
-  background-color: #f8d7da;
+  background: linear-gradient(135deg, #c82333, #bd2130);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.sign-out-link:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.sign-out-icon {
+  font-size: 1rem;
 }
 
 .main-content {
