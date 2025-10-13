@@ -7,7 +7,6 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import SustainabilityReadiness from './components/SustainabilityReadiness';
-import Results from './components/Results';
 import './App.css';
 
 function ProtectedRoute({ children }) {
@@ -72,14 +71,6 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <SustainabilityReadiness />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/results" 
-                element={
-                  <ProtectedRoute>
-                    <Results />
                   </ProtectedRoute>
                 } 
               />
