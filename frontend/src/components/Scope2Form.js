@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useCarbonEmissions } from '../contexts/CarbonEmissionsContext';
 import './Scope2Form.css';
 
 const Scope2Form = () => {
   const { user, logout } = useAuth();
+  const { updateScopeData } = useCarbonEmissions();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     year: '2018',
@@ -45,6 +47,21 @@ const Scope2Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Scope 2 data submitted:', formData);
+    
+    // Save the data to context
+    updateScopeData('scope2', {
+      purchasedElectricity: {
+        year: formData.year,
+        facilityId: formData.facilityId,
+        electricityConsumption: formData.electricityConsumption,
+        units: formData.units,
+        calculationApproach: formData.calculationApproach,
+        emissionFactor: formData.emissionFactor,
+        customEmissionFactor: formData.customEmissionFactor,
+        submittedAt: new Date().toISOString()
+      }
+    });
+    
     alert('Scope 2 data saved successfully!');
     // Navigate back to Data Center
     navigate('/data-center');

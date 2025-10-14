@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useSustainability } from '../contexts/SustainabilityContext';
+import { useCarbonEmissions } from '../contexts/CarbonEmissionsContext';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { scores, isSubmitted } = useSustainability();
+  const { carbonData, hasData } = useCarbonEmissions();
   const [sdgData, setSdgData] = useState(null);
 
   useEffect(() => {
@@ -199,10 +201,48 @@ const Dashboard = () => {
           <div className="summary-section">
             <h2 className="section-title">Data Center</h2>
             <div className="data-center-content">
-              <p>Sorry, there is no information available to show. Please click the button below to fill in the required information.</p>
-              <Link to="/data-center" className="btn btn-primary">
-                Proceed to Carbon Emissions Calculator
-              </Link>
+              {hasData() ? (
+                <div className="carbon-data-summary">
+                  <h4>Carbon Emissions Data Summary</h4>
+                  <div className="carbon-scopes">
+                    {carbonData.scope1 && Object.keys(carbonData.scope1).length > 0 && (
+                      <div className="scope-summary">
+                        <h5>Scope 1: Direct Emissions</h5>
+                        <p>Data available for {Object.keys(carbonData.scope1).length} category(ies)</p>
+                      </div>
+                    )}
+                    {carbonData.scope2 && Object.keys(carbonData.scope2).length > 0 && (
+                      <div className="scope-summary">
+                        <h5>Scope 2: Indirect Emissions</h5>
+                        <p>Data available for {Object.keys(carbonData.scope2).length} category(ies)</p>
+                        {carbonData.scope2.purchasedElectricity && (
+                          <div className="electricity-details">
+                            <p><strong>Electricity Consumption:</strong> {carbonData.scope2.purchasedElectricity.electricityConsumption} {carbonData.scope2.purchasedElectricity.units}</p>
+                            <p><strong>Year:</strong> {carbonData.scope2.purchasedElectricity.year}</p>
+                            <p><strong>Facility ID:</strong> {carbonData.scope2.purchasedElectricity.facilityId}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {carbonData.scope3 && Object.keys(carbonData.scope3).length > 0 && (
+                      <div className="scope-summary">
+                        <h5>Scope 3: Other Indirect Emissions</h5>
+                        <p>Data available for {Object.keys(carbonData.scope3).length} category(ies)</p>
+                      </div>
+                    )}
+                  </div>
+                  <Link to="/data-center" className="btn btn-primary">
+                    View/Edit Carbon Data
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <p>Sorry, there is no information available to show. Please click the button below to fill in the required information.</p>
+                  <Link to="/data-center" className="btn btn-primary">
+                    Proceed to Carbon Emissions Calculator
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

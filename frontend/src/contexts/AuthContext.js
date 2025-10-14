@@ -46,6 +46,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('sustainabilityScores');
       localStorage.removeItem('sustainabilitySubmitted');
       localStorage.removeItem('sdgFormData');
+      // Clear carbon emissions data
+      localStorage.removeItem('carbonEmissionsData');
+      localStorage.removeItem('carbonEmissionsSubmitted');
       
       localStorage.setItem('token', access_token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
@@ -79,6 +82,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('sustainabilityScores');
     localStorage.removeItem('sustainabilitySubmitted');
     localStorage.removeItem('sdgFormData');
+    // Clear carbon emissions data
+    localStorage.removeItem('carbonEmissionsData');
+    localStorage.removeItem('carbonEmissionsSubmitted');
     delete axios.defaults.headers.common['Authorization'];
     setUser(null);
   };
