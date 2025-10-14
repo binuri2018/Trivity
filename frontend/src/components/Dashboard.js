@@ -17,22 +17,24 @@ const Dashboard = () => {
     }
   }, []);
 
-  const getScoreLevel = (score) => {
+  const getScoreLevel = (score, isSubmitted) => {
+    if (!isSubmitted) return { level: 'Not Started', color: '#6c757d' };
     if (score >= 80) return { level: 'Excellent', color: '#28a745' };
     if (score >= 60) return { level: 'Good', color: '#17a2b8' };
     if (score >= 40) return { level: 'Fair', color: '#ffc107' };
     return { level: 'Poor', color: '#dc3545' };
   };
 
-  const getScoreMessage = (score) => {
+  const getScoreMessage = (score, isSubmitted) => {
+    if (!isSubmitted) return "Complete the Sustainability Readiness Index assessment to get your personalized score and recommendations";
     if (score >= 80) return "Excellent understanding of sustainability with comprehensive processes in place";
     if (score >= 60) return "Have a good understanding of sustainability and there are processes in place to practice the requirements of sustainability";
     if (score >= 40) return "Basic understanding of sustainability with some processes in place";
     return "Limited understanding of sustainability, needs improvement in processes";
   };
 
-  const overallScore = isSubmitted ? scores.overall : 58.5;
-  const scoreInfo = getScoreLevel(overallScore);
+  const overallScore = isSubmitted ? scores.overall : 0;
+  const scoreInfo = getScoreLevel(overallScore, isSubmitted);
 
   return (
     <div className="summary-container">
@@ -114,7 +116,7 @@ const Dashboard = () => {
                   </div>
                   <div className="score-explanation">
                     <h4>What the score means</h4>
-                    <p>{getScoreMessage(overallScore)}</p>
+                    <p>{getScoreMessage(overallScore, isSubmitted)}</p>
                   </div>
                 </div>
                 <div className="medals-section">
@@ -130,31 +132,31 @@ const Dashboard = () => {
               </div>
               <div className="score-breakdown">
                 <div className="breakdown-gauge">
-                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.general : 100, '--color': '#28a745' }}>
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.general : 0, '--color': '#dc3545' }}>
                     <div className="mini-gauge-fill"></div>
                     <span className="mini-gauge-text">General</span>
-                    <span className="mini-gauge-score">{isSubmitted ? scores.general : 100}%</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.general : 0}%</span>
                   </div>
                 </div>
                 <div className="breakdown-gauge">
-                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.environmental : 60, '--color': '#ffc107' }}>
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.environmental : 0, '--color': '#dc3545' }}>
                     <div className="mini-gauge-fill"></div>
                     <span className="mini-gauge-text">Environment</span>
-                    <span className="mini-gauge-score">{isSubmitted ? scores.environmental : 60}%</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.environmental : 0}%</span>
                   </div>
                 </div>
                 <div className="breakdown-gauge">
-                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.social : 60, '--color': '#ffc107' }}>
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.social : 0, '--color': '#dc3545' }}>
                     <div className="mini-gauge-fill"></div>
                     <span className="mini-gauge-text">Social</span>
-                    <span className="mini-gauge-score">{isSubmitted ? scores.social : 60}%</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.social : 0}%</span>
                   </div>
                 </div>
                 <div className="breakdown-gauge">
-                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.governance : 75, '--color': '#17a2b8' }}>
+                  <div className="mini-gauge" style={{ '--score': isSubmitted ? scores.governance : 0, '--color': '#dc3545' }}>
                     <div className="mini-gauge-fill"></div>
                     <span className="mini-gauge-text">Governance</span>
-                    <span className="mini-gauge-score">{isSubmitted ? scores.governance : 75}%</span>
+                    <span className="mini-gauge-score">{isSubmitted ? scores.governance : 0}%</span>
                   </div>
                 </div>
               </div>

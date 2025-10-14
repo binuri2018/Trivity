@@ -41,6 +41,12 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post('/api/login', { email, password });
       const { access_token, user } = response.data;
       
+      // Clear any existing sustainability data before setting new user
+      localStorage.removeItem('sustainabilityAnswers');
+      localStorage.removeItem('sustainabilityScores');
+      localStorage.removeItem('sustainabilitySubmitted');
+      localStorage.removeItem('sdgFormData');
+      
       localStorage.setItem('token', access_token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       setUser(user);
@@ -68,6 +74,11 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    // Clear all sustainability-related data
+    localStorage.removeItem('sustainabilityAnswers');
+    localStorage.removeItem('sustainabilityScores');
+    localStorage.removeItem('sustainabilitySubmitted');
+    localStorage.removeItem('sdgFormData');
     delete axios.defaults.headers.common['Authorization'];
     setUser(null);
   };

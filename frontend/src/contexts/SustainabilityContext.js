@@ -29,12 +29,24 @@ export const SustainabilityProvider = ({ children }) => {
     
     if (savedAnswers) {
       setAnswers(JSON.parse(savedAnswers));
+    } else {
+      setAnswers({});
     }
     if (savedScores) {
       setScores(JSON.parse(savedScores));
+    } else {
+      setScores({
+        overall: 0,
+        environmental: 0,
+        social: 0,
+        governance: 0,
+        general: 0
+      });
     }
     if (savedSubmitted) {
       setIsSubmitted(JSON.parse(savedSubmitted));
+    } else {
+      setIsSubmitted(false);
     }
   }, []);
 
