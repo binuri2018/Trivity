@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useSustainability } from '../contexts/SustainabilityContext';
 import './SustainabilityReadiness.css';
@@ -8,6 +8,7 @@ const SustainabilityReadiness = () => {
   const [activeTab, setActiveTab] = useState('General');
   const { user, logout } = useAuth();
   const { answers, updateAnswer, submitAnswers, isSubmitted } = useSustainability();
+  const navigate = useNavigate();
 
   const questions = {
     General: [
@@ -56,9 +57,17 @@ const SustainabilityReadiness = () => {
     alert('Draft saved successfully!');
   };
 
+  const handleNext = () => {
+    const currentIndex = tabs.indexOf(activeTab);
+    if (currentIndex < tabs.length - 1) {
+      setActiveTab(tabs[currentIndex + 1]);
+    }
+  };
+
   const handleSubmit = () => {
     submitAnswers();
     alert('Answers submitted successfully! Your scores have been calculated.');
+    navigate('/dashboard');
   };
 
   const tabs = ['General', 'Environment', 'Social', 'Governance'];
@@ -184,9 +193,15 @@ const SustainabilityReadiness = () => {
             <button className="save-draft-btn" onClick={handleSaveDraft}>
               Save Draft
             </button>
-            <button className="submit-btn" onClick={handleSubmit}>
-              Submit
-            </button>
+            {activeTab !== 'Governance' ? (
+              <button className="next-btn" onClick={handleNext}>
+                Next
+              </button>
+            ) : (
+              <button className="submit-btn" onClick={handleSubmit}>
+                Submit
+              </button>
+            )}
           </div>
         </div>
       </div>

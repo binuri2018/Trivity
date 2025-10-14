@@ -390,6 +390,23 @@
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
+.next-btn {
+  background: #20c997;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+  background: #1aa085;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .sustainability-layout {
