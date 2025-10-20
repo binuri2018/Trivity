@@ -15,12 +15,13 @@ app = Flask(__name__)
 config_name = os.getenv('FLASK_ENV', 'development')
 app.config.from_object(config[config_name])
 
-# Initialize extensions with more permissive CORS for debugging
+# Initialize extensions with comprehensive CORS configuration
 CORS(app, 
-     origins=app.config['CORS_ORIGINS'],
+     origins=['*'],  # Allow all origins for now
      supports_credentials=True,
-     allow_headers=['Content-Type', 'Authorization'],
-     methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+     allow_headers=['Content-Type', 'Authorization', 'X-Requested-With'],
+     methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
+     expose_headers=['Content-Range', 'X-Content-Range'])
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
@@ -36,6 +37,15 @@ class JSONEncoder(json.JSONEncoder):
         return super().default(obj)
 
 app.json_encoder = JSONEncoder
+
+# Manual CORS handler as backup
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-Requested-With')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 @app.route('/api/register', methods=['POST'])
 def register():
