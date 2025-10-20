@@ -16,7 +16,7 @@ config_name = os.getenv('FLASK_ENV', 'development')
 app.config.from_object(config[config_name])
 
 # Initialize extensions
-CORS(app, origins=app.config['CORS_ORIGINS'])
+CORS(app, origins=app.config['CORS_ORIGINS'], supports_credentials=True)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
