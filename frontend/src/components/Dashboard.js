@@ -9,15 +9,7 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const { scores, isSubmitted } = useSustainability();
   const { carbonData, hasData } = useCarbonEmissions();
-  const [sdgData, setSdgData] = useState(null);
-
-  useEffect(() => {
-    // Load SDG data from localStorage
-    const savedSdgData = localStorage.getItem('sdgFormData');
-    if (savedSdgData) {
-      setSdgData(JSON.parse(savedSdgData));
-    }
-  }, []);
+  // SDG data loading removed since it's not used in this component
 
   const getScoreLevel = (score, isSubmitted) => {
     if (!isSubmitted) return { level: 'Not Started', color: '#6c757d' };
