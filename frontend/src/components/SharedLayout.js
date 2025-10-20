@@ -40,20 +40,26 @@ const SharedLayout = ({ children, title = "Dashboard" }) => {
             <Link to="/sustainability" className={`nav-link ${isActive('/sustainability') ? 'active' : ''}`}>
               Sustainability Readiness Index
             </Link>
-            <a href="#" className="nav-link">Recommended UN SDGs</a>
-            <a href="#" className="nav-link">Data Center</a>
-            <a href="#" className="nav-link">User Profile</a>
+            <Link to="/sdgs-form" className={`nav-link ${isActive('/sdgs-form') ? 'active' : ''}`}>
+              Recommended UN SDGs
+            </Link>
+            <Link to="/data-center" className={`nav-link ${isActive('/data-center') ? 'active' : ''}`}>
+              Data Center
+            </Link>
+            <Link to="/profile" className={`nav-link ${isActive('/profile') ? 'active' : ''}`}>
+              User Profile
+            </Link>
           </nav>
 
           <div className="coming-soon">
             <h3>COMING SOON</h3>
-            <a href="#" className="nav-link disabled">Green Financing</a>
-            <a href="#" className="nav-link disabled">Green Exchange</a>
-            <a href="#" className="nav-link disabled">Sustainability Frameworks</a>
-            <a href="#" className="nav-link disabled">Report Generation</a>
-            <a href="#" className="nav-link disabled">Water Usage</a>
-            <a href="#" className="nav-link disabled">Supply Chain Mgmt</a>
-            <a href="#" className="nav-link disabled">Biodiversity</a>
+            <span className="nav-link disabled">Green Financing</span>
+            <span className="nav-link disabled">Green Exchange</span>
+            <span className="nav-link disabled">Sustainability Frameworks</span>
+            <span className="nav-link disabled">Report Generation</span>
+            <span className="nav-link disabled">Water Usage</span>
+            <span className="nav-link disabled">Supply Chain Mgmt</span>
+            <span className="nav-link disabled">Biodiversity</span>
           </div>
 
           <div className="sign-out">

@@ -9,7 +9,7 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const { scores, isSubmitted } = useSustainability();
   const { carbonData, hasData } = useCarbonEmissions();
-  const [sdgData, setSdgData] = useState(null);
+  const [sdgData] = useState(null); // Remove setSdgData since it's not used
 
   useEffect(() => {
     // Load SDG data from localStorage
@@ -81,13 +81,13 @@ const Dashboard = () => {
             <div className="coming-soon">
               <h3>Coming Soon</h3>
               <ul>
-                <li><a href="#" className="nav-link disabled">Green Financing</a></li>
-                <li><a href="#" className="nav-link disabled">Green Exchange</a></li>
-                <li><a href="#" className="nav-link disabled">Sustainability Frameworks</a></li>
-                <li><a href="#" className="nav-link disabled">Report Generation</a></li>
-                <li><a href="#" className="nav-link disabled">Water Usage</a></li>
-                <li><a href="#" className="nav-link disabled">Supply Chain Mgmt</a></li>
-                <li><a href="#" className="nav-link disabled">Biodiversity</a></li>
+                <li><span className="nav-link disabled">Green Financing</span></li>
+                <li><span className="nav-link disabled">Green Exchange</span></li>
+                <li><span className="nav-link disabled">Sustainability Frameworks</span></li>
+                <li><span className="nav-link disabled">Report Generation</span></li>
+                <li><span className="nav-link disabled">Water Usage</span></li>
+                <li><span className="nav-link disabled">Supply Chain Mgmt</span></li>
+                <li><span className="nav-link disabled">Biodiversity</span></li>
               </ul>
             </div>
           </nav>

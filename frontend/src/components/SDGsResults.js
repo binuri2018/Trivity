@@ -22,7 +22,7 @@ const SDGsResults = () => {
 
   const generateSDGRecommendations = (data) => {
     // SDG recommendation algorithm based on company profile
-    const recommendations = [];
+    // const recommendations = []; // Remove unused variable
     
     // Major Impact SDGs (immediate opportunities)
     const majorImpacts = [];
@@ -184,13 +184,13 @@ const SDGsResults = () => {
             
             <div className="coming-soon">COMING SOON</div>
             <ul>
-              <li><a href="#" className="nav-link disabled">Green Financing</a></li>
-              <li><a href="#" className="nav-link disabled">Green Exchange</a></li>
-              <li><a href="#" className="nav-link disabled">Sustainability Frameworks</a></li>
-              <li><a href="#" className="nav-link disabled">Report Generation</a></li>
-              <li><a href="#" className="nav-link disabled">Water Usage</a></li>
-              <li><a href="#" className="nav-link disabled">Supply Chain Mgmt</a></li>
-              <li><a href="#" className="nav-link disabled">Biodiversity</a></li>
+              <li><span className="nav-link disabled">Green Financing</span></li>
+              <li><span className="nav-link disabled">Green Exchange</span></li>
+              <li><span className="nav-link disabled">Sustainability Frameworks</span></li>
+              <li><span className="nav-link disabled">Report Generation</span></li>
+              <li><span className="nav-link disabled">Water Usage</span></li>
+              <li><span className="nav-link disabled">Supply Chain Mgmt</span></li>
+              <li><span className="nav-link disabled">Biodiversity</span></li>
             </ul>
           </nav>
 

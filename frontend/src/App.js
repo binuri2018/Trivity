@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { SustainabilityProvider } from './contexts/SustainabilityContext';
 import { CarbonEmissionsProvider } from './contexts/CarbonEmissionsContext';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar'; // Unused import
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';

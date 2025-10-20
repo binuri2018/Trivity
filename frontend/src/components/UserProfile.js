@@ -30,20 +30,20 @@ const UserProfile = () => {
     alert('Profile updated successfully!');
   };
 
-  const handleCancel = () => {
-    setIsEditing(false);
-    // Reset to original data
-    setProfileData({
-      name: user?.name || 'Demo User',
-      email: user?.email || 'demo@example.com',
-      company: 'Trivity Solutions',
-      position: 'Sustainability Manager',
-      phone: '+1 (555) 123-4567',
-      location: 'New York, NY',
-      joinDate: 'January 2024',
-      subscriptionType: 'Premium User'
-    });
-  };
+  // const handleCancel = () => { // Remove unused function
+  //   setIsEditing(false);
+  //   // Reset to original data
+  //   setProfileData({
+  //     name: user?.name || 'Demo User',
+  //     email: user?.email || 'demo@example.com',
+  //     company: 'Trivity Solutions',
+  //     position: 'Sustainability Manager',
+  //     phone: '+1 (555) 123-4567',
+  //     location: 'New York, NY',
+  //     joinDate: 'January 2024',
+  //     subscriptionType: 'Premium User'
+  //   });
+  // };
 
   return (
     <div className="profile-container">
@@ -88,13 +88,13 @@ const UserProfile = () => {
             <div className="coming-soon">
               <h3>Coming Soon</h3>
               <ul>
-                <li><a href="#" className="nav-link disabled">Green Financing</a></li>
-                <li><a href="#" className="nav-link disabled">Green Exchange</a></li>
-                <li><a href="#" className="nav-link disabled">Sustainability Frameworks</a></li>
-                <li><a href="#" className="nav-link disabled">Report Generation</a></li>
-                <li><a href="#" className="nav-link disabled">Water Usage</a></li>
-                <li><a href="#" className="nav-link disabled">Supply Chain Mgmt</a></li>
-                <li><a href="#" className="nav-link disabled">Biodiversity</a></li>
+                <li><span className="nav-link disabled">Green Financing</span></li>
+                <li><span className="nav-link disabled">Green Exchange</span></li>
+                <li><span className="nav-link disabled">Sustainability Frameworks</span></li>
+                <li><span className="nav-link disabled">Report Generation</span></li>
+                <li><span className="nav-link disabled">Water Usage</span></li>
+                <li><span className="nav-link disabled">Supply Chain Mgmt</span></li>
+                <li><span className="nav-link disabled">Biodiversity</span></li>
               </ul>
             </div>
           </nav>
