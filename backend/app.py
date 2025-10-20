@@ -15,8 +15,12 @@ app = Flask(__name__)
 config_name = os.getenv('FLASK_ENV', 'development')
 app.config.from_object(config[config_name])
 
-# Initialize extensions
-CORS(app, origins=app.config['CORS_ORIGINS'], supports_credentials=True)
+# Initialize extensions with more permissive CORS for debugging
+CORS(app, 
+     origins=app.config['CORS_ORIGINS'],
+     supports_credentials=True,
+     allow_headers=['Content-Type', 'Authorization'],
+     methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
