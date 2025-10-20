@@ -9,7 +9,7 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const { scores, isSubmitted } = useSustainability();
   const { carbonData, hasData } = useCarbonEmissions();
-  const [sdgData] = useState(null); // Remove setSdgData since it's not used
+  const [sdgData, setSdgData] = useState(null);
 
   useEffect(() => {
     // Load SDG data from localStorage
