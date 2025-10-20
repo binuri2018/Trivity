@@ -18,7 +18,7 @@ class Config:
     DEBUG = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
     
     # CORS Configuration
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000','https://trivity.netlify.app/').split(',')
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000,https://trivity.netlify.app').split(',')
     
     # Debug: If CORS_ORIGINS is not set properly, allow all origins
     if not CORS_ORIGINS or CORS_ORIGINS == ['']:
